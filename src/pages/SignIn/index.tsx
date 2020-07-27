@@ -8,7 +8,7 @@ import getValidationErrors from '../../utils/getValidationErrors';
 import * as Yup from 'yup';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../hooks/AuthContext';
 import { sign } from 'crypto';
 
 interface SignInFormData {
@@ -36,8 +36,11 @@ const SignIn: React.FC = () => {
         });
         signIn({ email: data.email, password: data.password });
       } catch (err) {
-        const errors = getValidationErrors(err);
-        formRef.current?.setErrors(errors);
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
+          formRef.current?.setErrors(errors);
+        }
+        //disparar um toast
       }
     },
     [signIn],
