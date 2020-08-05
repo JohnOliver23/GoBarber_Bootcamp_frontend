@@ -6,7 +6,7 @@ import logoImg from '../../assets/logo.svg';
 import { Container, Content, Background, AnimationContainer } from './styles';
 import getValidationErrors from '../../utils/getValidationErrors';
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { useAuth } from '../../hooks/auth';
@@ -25,6 +25,8 @@ const SignIn: React.FC = () => {
 
   const { addToast } = useToast();
 
+  const history = useHistory();
+
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
       try {
@@ -39,6 +41,7 @@ const SignIn: React.FC = () => {
           abortEarly: false,
         });
         await signIn({ email: data.email, password: data.password });
+        history.push('/dashboard');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
