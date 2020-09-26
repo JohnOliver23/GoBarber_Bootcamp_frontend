@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   Container,
@@ -8,6 +8,8 @@ import {
   Content,
   Schedule,
   NextAppointment,
+  Section,
+  Appointment,
   Calendar,
 } from './styles';
 
@@ -16,6 +18,8 @@ import { FiPower, FiClock } from 'react-icons/fi';
 import { useAuth } from '../../hooks/auth';
 
 const Dashboard: React.FC = () => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
   const { signOut, user } = useAuth();
   return (
     <Container>
@@ -59,6 +63,51 @@ const Dashboard: React.FC = () => {
               </span>
             </div>
           </NextAppointment>
+          <Section>
+            <strong>Manhã</strong>
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+              <div>
+                <img
+                  src="https://avatars0.githubusercontent.com/u/23298873?s=460&u=490eb1c5dac14416a5ca23fd957f67a793486608&v=4"
+                  alt="Jean Lobo"
+                />
+                <strong>Jean Lobo</strong>
+              </div>
+            </Appointment>
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+              <div>
+                <img
+                  src="https://avatars0.githubusercontent.com/u/23298873?s=460&u=490eb1c5dac14416a5ca23fd957f67a793486608&v=4"
+                  alt="Jean Lobo"
+                />
+                <strong>Jean Lobo</strong>
+              </div>
+            </Appointment>
+          </Section>
+          <Section>
+            <strong>Tarde</strong>
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+              <div>
+                <img
+                  src="https://avatars0.githubusercontent.com/u/23298873?s=460&u=490eb1c5dac14416a5ca23fd957f67a793486608&v=4"
+                  alt="Jean Lobo"
+                />
+                <strong>Jean Lobo</strong>
+              </div>
+            </Appointment>
+          </Section>
         </Schedule>
         <Calendar />
       </Content>
